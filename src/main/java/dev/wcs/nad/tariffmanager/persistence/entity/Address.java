@@ -25,4 +25,18 @@ public class Address {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
+    public Address(String city, String postalcode, String street, String number) {
+        this.city = city;
+        this.postalcode = postalcode;
+        this.street = street;
+        this.number = number;
+    }
+
+    public Address() {
+    }
+
+    
+
+    
+
 }
