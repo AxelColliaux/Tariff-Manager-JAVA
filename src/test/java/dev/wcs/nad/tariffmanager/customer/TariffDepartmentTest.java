@@ -1,8 +1,10 @@
 package dev.wcs.nad.tariffmanager.customer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.math.BigDecimal;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -34,5 +36,13 @@ public class TariffDepartmentTest {
 
         tariffRepository.save(tariff);
         departmentRepository.save(department);
-    }
+
+        Tariff savedTariff = tariffRepository.findById(tariff.getId()).orElse(null);
+        Department savedDepartment = departmentRepository.findById(department.getId()).orElse(null);
+
+        assertNotNull(savedTariff);
+        assertNotNull(savedDepartment);
+
+        assertEquals(savedDepartment.getId(), savedTariff.getDepartment().getId());
+        }
 }
