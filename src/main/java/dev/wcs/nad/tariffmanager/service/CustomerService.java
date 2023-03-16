@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import java.util.*; 
 
 @Service
 public class CustomerService {
@@ -61,12 +59,12 @@ public class CustomerService {
 
     // Examine the Repository to see if there are methods defined which can be used here.
     public Iterable<Customer> filterOfLegalAgeCustomersInRepository() {
-        return null;
+        return customerRepository.findAllByBirthdateIsBefore(LocalDate.now().minusYears(legalAge));
     }
 
     // Examine the Repository to see if there are methods defined which can be used here.
     public Iterable<Customer> filterOfLegalAgeAndLastname(String lastname) {
-        return null;
+        return customerRepository.findAllByBirthdateIsBeforeAndLastnameContainingIgnoreCase(LocalDate.now().minusYears(legalAge), lastname);    
     }
 
     private boolean isOfLegalAge(Customer customers) {
