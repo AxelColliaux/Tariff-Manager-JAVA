@@ -19,12 +19,13 @@ public class CustomerService {
     private final AddressRepository addressRepository;
     private final ContactRepository contactRepository;
     // Challenge: Make legalAge configurable
-    private final int legalAge = 18;
+    private final int legalAge;
 
-    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, ContactRepository contactRepository) {
+    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, ContactRepository contactRepository, @Value("${maturiy.age}") int legalAge) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
         this.contactRepository = contactRepository;
+        this.legalAge = legalAge;
     }
 
     public Iterable<Customer> readAllCustomers() {
