@@ -33,10 +33,11 @@ public class ContractView {
         List<ContractInfoDto> contractInfoDtos = new ArrayList<>();
         // Challenge:
         // 1. Read Contracts for User from Service
+        contractInfoDtos = entityToDtoMapper.contractsToContractInfosDto(contractService.readContractsForUser(custId));
         // 2. Map Contract objects to ContractInfoDto objects and add to List
+        model.addAttribute("contractInfoDtos", contractInfoDtos);
         // 3. Redirect to a new page "customerContractsListView"
-
-        return null;
+        return "customerContractsListView";
     }
 
 }

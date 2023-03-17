@@ -7,25 +7,26 @@
         <section layout:fragment="content">
             <div class="container">
                 <table>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Birthdate</th>
-                    <!-- Challenge: This column should be added -->
-                    <th>Show Contracts</th>
-                    <th>Edit...</th>
-                </tr>
-                <tr th:each="customer: ${customers}">
-                    <td th:text="${customer.firstname}" />
-                    <td th:text="${customer.lastname}" />
-                    <td th:text="${customer.birthdate}" />
-                    <td>
-                        <a th:href="@{/public/customer/edit/{id}(id=${customer.id})}">Edit</a></td>
-                        <!-- Challenge: Add the new column here with a link to /public/customer/{customerId}/contracts/view -->
-                    <td>
-                        <a th:href="@{/public/customer/{id}/contracts/view(id=${customer.id})}">view contract</a></td>
-
-                </tr>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Birthdate</th>
+                        <th>Show Contracts</th> <!-- Challenge: This column should be added -->
+                        <th>Edit...</th>
+                    </tr>
+                    <tr th:each="customer: ${customers}">
+                        <td th:text="${customer.firstname}"></td>
+                        <td th:text="${customer.lastname}"></td>
+                        <td th:text="${customer.birthdate}"></td>
+                        <td>
+                            <!-- Challenge: Add the new column here with a link to /public/customer/{customerId}/contracts/view -->
+                            <a th:href="@{/public/customer/{custId}/contracts/view(custId=${customer.id})}">Show Contracts</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/public/customer/edit/{id}(id=${customer.id})}">Edit</a>
+                            <a th:href="@{/public/customer/{id}/contracts/view(id=${customer.id})}">view contract</a>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </section>
