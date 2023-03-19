@@ -32,6 +32,8 @@ public class WebSecurityConfig {
         // Only allow frames if using h2 as the database for console
         http.headers().frameOptions().disable();
         http.authorizeHttpRequests()
+        .requestMatchers("/public/customer/list").hasAuthority("ROLE_BACKOFFICE")
+        .requestMatchers("/public/admin/").hasAuthority("ROLE_ADMIN")
         .anyRequest().permitAll()
         .and()
             .formLogin()

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.mail.AuthenticationFailedException;
+
+import java.util.List;
 import java.util.Optional;
 
 import static dev.wcs.nad.tariffmanager.identity.user.IdentityServiceException.Reason.*;
@@ -184,6 +186,15 @@ public class UserService {
 
     public Optional<User> findUser(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public List<User> findUsers(Optional<String> roleFilter) {
+        if (roleFilter.isPresent()){
+            String emailPrefix = roleFilter.get() + "@";
+            return userRepository.findByUsernameStartingWithIgnoreCase(emailPrefix);
+        } else {
+            return userRepository.findAll();
+        }
     }
 
     public User update(User user) {
